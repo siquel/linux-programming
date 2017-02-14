@@ -1,0 +1,2 @@
+LINE A = I am the child - value = 20
+LINE B = I am the parent - value = 5
