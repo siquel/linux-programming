@@ -10,7 +10,7 @@
 
 static uint32_t ipv4(uint8_t _a, uint8_t _b, uint8_t _c, uint8_t _d)
 {
-    return uint32_t(_a) | (uint32_t(_b) << 8) | (uint32_t(_c) << 16) | (uint32_t(_d) << 24);
+    return (uint32_t)_a | (((uint32_t)_b) << 8) | (((uint32_t)_c) << 16) | (((uint32_t)_d) << 24);
 }
 
 static void usage(const char* program_name)
