@@ -54,11 +54,29 @@ int main()
 
         if (read_bytes > 0)
         {
-            fprintf(stdout, "Got message: %s\n", buffer);
+//            fprintf(stdout, "Got message: %d bytes, content %x\n", read_bytes, buffer);
+            int a = 0, b = 0;
+            memcpy(&a, buffer, sizeof(int));
+            memcpy(&b, buffer + sizeof(int), sizeof(int));
+
+            printf("Got integers %d and %d\n", a, b);
+
+            int sum = a + b;
+            int diff = a - b;
+            int product = a * b;
+
+            const size_t size = sizeof(int) * 3;
+            memcpy(buffer, &sum, sizeof(int));
+            memcpy(buffer + sizeof(int), &diff, sizeof(int));
+            memcpy(buffer + sizeof(int) * 2, &product, sizeof(int));
+
+            if (send(clientfd, buffer, size, 0) == -1)
+            {
+                fprintf(stderr, "send() failed, errno: %d\n", errno);
+                return 1;
+            }
         }
     }
-
-    return 0;
 
     return 0;
 }
